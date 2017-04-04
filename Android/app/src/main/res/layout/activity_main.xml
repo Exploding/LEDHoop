@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="exploding.hoopcontroller.MainActivity" android:background="@color/background_dark_2">
+
+    <com.larswerkman.holocolorpicker.ColorPicker
+            android:id="@+id/picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"/>
+    <Button
+            android:text="Set Color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/picker"
+            android:layout_centerHorizontal="true" android:layout_marginTop="14dp" android:id="@+id/setColorButton"
+            style="@style/Widget.AppCompat.Button.Colored" android:background="?android:attr/textColorLink"
+            android:onClick="setColorClick"/>
+    <ToggleButton
+            android:text="Chase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/setColorButton"
+            android:layout_alignParentStart="true" android:layout_marginTop="15dp" android:id="@+id/toggleChase"
+            tools:text="Chase" android:textOff="Chase" android:textOn="Chase"/>
+    <ToggleButton
+            android:text="Rainbow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignBottom="@+id/toggleChase"
+            android:layout_alignStart="@+id/setColorButton" android:id="@+id/toggleRainbow" android:textOff="Rainbow"
+            android:textOn="Rainbow"/>
+    <ToggleButton
+            android:text="Sparkle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/toggleChase"
+            android:layout_alignParentStart="true" android:id="@+id/toggleSparkle" android:textOff="Sparkle"
+            android:textOn="Sparkle"/>
+    <ToggleButton
+            android:text="Strobe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_below="@+id/toggleRainbow"
+            android:layout_alignEnd="@+id/toggleRainbow" android:id="@+id/toggleStrobe" android:textOff="Strobe"
+            android:textOn="Strobe"/>
+    <ToggleButton
+            android:text="Solid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignBottom="@+id/toggleStrobe"
+            android:layout_alignEnd="@+id/toggleRainbowCycle" android:id="@+id/toggleSolid" android:textOff="Solid"
+            android:textOn="Solid"/>
+    <ToggleButton
+            android:text="ToggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_alignBottom="@+id/picker"
+            android:layout_alignStart="@+id/toggleSolid" android:layout_marginStart="20dp"
+            android:layout_marginBottom="244dp" android:id="@+id/toggleOnOff" android:checked="true"
+            android:textOn="OFF" android:textOff="OFF"/>
+    <ToggleButton
+            android:text="Rainbow Cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleRainbowCycle"
+            android:textOff="Cycle" android:textOn="Cycle" android:layout_above="@+id/toggleSolid"
+            android:layout_alignParentEnd="true"/>
+</RelativeLayout>
