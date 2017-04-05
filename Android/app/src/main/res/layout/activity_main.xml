@@ -29,43 +29,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_below="@+id/setColorButton"
             android:layout_alignParentStart="true" android:layout_marginTop="15dp" android:id="@+id/toggleChase"
-            tools:text="Chase" android:textOff="Chase" android:textOn="Chase"/>
+            tools:text="Chase" android:textOff="Chase" android:textOn="Chase" android:tag="0"/>
     <ToggleButton
             android:text="Rainbow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_alignBottom="@+id/toggleChase"
             android:layout_alignStart="@+id/setColorButton" android:id="@+id/toggleRainbow" android:textOff="Rainbow"
-            android:textOn="Rainbow"/>
+            android:textOn="Rainbow" android:tag="1"/>
     <ToggleButton
             android:text="Sparkle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_below="@+id/toggleChase"
             android:layout_alignParentStart="true" android:id="@+id/toggleSparkle" android:textOff="Sparkle"
-            android:textOn="Sparkle"/>
+            android:textOn="Sparkle" android:tag="3"/>
     <ToggleButton
             android:text="Strobe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_below="@+id/toggleRainbow"
             android:layout_alignEnd="@+id/toggleRainbow" android:id="@+id/toggleStrobe" android:textOff="Strobe"
-            android:textOn="Strobe"/>
+            android:textOn="Strobe" android:tag="4"/>
     <ToggleButton
             android:text="Solid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_alignBottom="@+id/toggleStrobe"
             android:layout_alignEnd="@+id/toggleRainbowCycle" android:id="@+id/toggleSolid" android:textOff="Solid"
-            android:textOn="Solid"/>
+            android:textOn="Solid" android:tag="5"/>
     <ToggleButton
             android:text="ToggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_alignBottom="@+id/picker"
             android:layout_alignStart="@+id/toggleSolid" android:layout_marginStart="20dp"
             android:layout_marginBottom="244dp" android:id="@+id/toggleOnOff" android:checked="true"
-            android:textOn="OFF" android:textOff="OFF"/>
+            android:textOn="OFF" android:textOff="OFF" android:tag="6"/>
     <ToggleButton
             android:text="Rainbow Cycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/toggleRainbowCycle"
             android:textOff="Cycle" android:textOn="Cycle" android:layout_above="@+id/toggleSolid"
-            android:layout_alignParentEnd="true"/>
+            android:layout_alignParentEnd="true" android:tag="2"/>
 </RelativeLayout>

@@ -2,14 +2,12 @@ package exploding.hoopcontroller;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 import android.widget.ToggleButton;
 import com.larswerkman.holocolorpicker.ColorPicker;
 
@@ -40,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
         BluetoothAdapter btAdapter = BluetoothAdapter.getDefaultAdapter();
         if(btAdapter != null) {
             if (btAdapter.isEnabled()) {
-                Log.d(TAG, "...Bluetooth ON...");
+                Log.d(TAG, "Bluetooth is on");
             } else {
+                Log.d(TAG, "Turning on bluetooth...");
                 //Prompt user to turn on Bluetooth
                 Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                 startActivityForResult(enableBtIntent, 1);
@@ -64,115 +63,60 @@ public class MainActivity extends AppCompatActivity {
         // Set event handlers
         toggleChaseBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onChaseChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleRainbowBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onRainbowChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleRainbowCycleBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onRainbowCycleChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleSparkleBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onSparkleChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleStrobeBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onStrobeChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleSolidBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onSolidChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
 
         toggleOnOffBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onOnOffChanged(buttonView, isChecked);
+                onToggleButtonChanged(buttonView, isChecked);
             }
         });
     }
 
     protected void setColorClick(View view) {
         int c = colorPicker.getColor();
-        colorPicker.setOldCenterColor(c);
 
+        colorPicker.setOldCenterColor(c);
         bluetoothController.setColor(c);
     }
 
-    protected void onChaseChanged(CompoundButton buttonView, boolean isChecked) {
+    private void onToggleButtonChanged(CompoundButton buttonView, boolean isChecked) {
         disableAllButtons();
         if(isChecked) {
             buttonView.setChecked(true);
+            bluetoothController.setEffect(Integer.parseInt(buttonView.getTag().toString()));
         }
-
-        bluetoothController.setEffect(0);
-    }
-
-    protected void onRainbowChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(1);
-    }
-
-    protected void onRainbowCycleChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(2);
-    }
-
-    protected void onSparkleChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(3);
-    }
-
-    protected void onStrobeChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(4);
-    }
-
-    protected void onSolidChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(5);
-    }
-
-    protected void onOnOffChanged(CompoundButton buttonView, boolean isChecked) {
-        disableAllButtons();
-        if(isChecked) {
-            buttonView.setChecked(true);
-        }
-
-        bluetoothController.setEffect(6);
     }
 
     @Override
