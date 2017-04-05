@@ -10,6 +10,8 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Set;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
@@ -26,11 +28,16 @@ public class BluetoothController {
     // SPP UUID service
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
-    // MAC address of the hoop's bluetooth module
-    private static String address = "90:CD:B6:35:16:4C";
+    // Hoop's device names
+    private ArrayList<String> deviceNames;
 
     public BluetoothController(BluetoothAdapter adapter) {
         btAdapter = adapter;
+
+        deviceNames = new ArrayList<>();
+        deviceNames.add("EXPLODING");
+        deviceNames.add("HC-05");
+        deviceNames.add("HC-12");
     }
 
     private BluetoothSocket createBluetoothSocket(BluetoothDevice device) throws IOException {
@@ -49,7 +56,16 @@ public class BluetoothController {
      * Attempts to re-establish the bluetooth connection after app resumes
      */
     public void resume() {
-        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+        BluetoothDevice device = null;
+        Set<BluetoothDevice> devices = btAdapter.getBondedDevices();
+        if (devices != null) {
+            for (BluetoothDevice blDevice : devices) {
+                if (deviceNames.contains(blDevice.getName())) {
+                    device = blDevice;
+                    break;
+                }
+            }
+        }
 
         try {
             btSocket = createBluetoothSocket(device);
