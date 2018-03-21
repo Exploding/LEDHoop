@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  </head>
+  <body>
+		<input name="fileInput" type="file" id="fileInput">
+		<div id="ledsContainer"></div>
+  </body>
+  <style>
+	.led {
+		display:inline-flex;
+		margin-left:2px;
+		background-color:black;
+		width:20px;
+		height:20px;
+	}
+  </style>
+  <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript">
+	var numLeds = 147;
+	var currentFrame = 0;
+	var totalFrames = 10;
+	var arr;
+  
+	$(document).ready(function() {
+		for(var i = 0; i < numLeds; i++) {
+			var div = $("<div></div>").addClass("led").attr("id", "led-" + i);
+			$("#ledsContainer").append(div);
+		}
+		
+		setInterval(function() {
+			if(currentFrame >= totalFrames) 
+				currentFrame = 0;
+				
+			showFrame(currentFrame);
+			
+			currentFrame++;
+		}, 50);
+    });
+	
+	$("#fileInput").change(function() {
+		var file = this.files[0];
+		var fr = new FileReader();
+		fr.onload = function() {
+			var data = fr.result;
+			arr = new Uint8Array(data);
+			showEffect(arr);
+		}
+		fr.readAsArrayBuffer(file);
+	});
+	
+	
+	function showEffect(arr) {
+		totalFrames = arr[0];
+		currentFrame = 0;
+	}
+	
+	function showFrame(frame) {
+		if(typeof(arr) != "undefined") {
+			var i = (frame * numLeds * 3) + 1;
+			for(var j = 0; j < numLeds; j++) {
+				$("#led-" + j).css("background-color", "rgb(" + arr[i] + "," + arr[i+1] + "," + arr[i+2] + ")");
+				i+=3;
+			}
+		}
+	}
+	
+  </script>
+</html>
