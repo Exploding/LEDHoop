@@ -9,12 +9,16 @@
 		<div id="ledsContainer"></div>
   </body>
   <style>
+	#ledsContainer {
+		position: relative;
+	}
 	.led {
+		position: absolute;
 		display:inline-flex;
 		margin-left:2px;
 		background-color:black;
-		width:20px;
-		height:20px;
+		width:10px;
+		height:10px;
 		border: 1px solid black;
 	}
   </style>
@@ -29,8 +33,16 @@
 	var arr;
   
 	$(document).ready(function() {
+		var center = [$(window).width() / 2, $(window).height() / 2]; // center point of hoop is the center of the page
+		var deg = (360 / numLeds) * (Math.PI / 180); // degrees of seperation between each LED in radians
+		var d = (Math.min($(window).width() / 2, $(window).height() / 2) - 75); // distance from center is 1/2 the smaller dimension
+		var rotationFactor = (numLeds / 360);
 		for(var i = 0; i < numLeds; i++) {
+			var left = (Math.cos(deg * i) * d) + center[0];
+			var top = center[1] - (Math.sin(deg * i) * d);
 			var div = $("<div></div>").addClass("led").attr("id", "led-" + i);
+			div.css("left", left + "px").css("top", top + "px");
+			div.css("transform", "rotate(" + ((rotationFactor * i) - 90) + "deg)");
 			$("#ledsContainer").append(div);
 		}
 		
